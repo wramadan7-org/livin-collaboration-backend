@@ -13,20 +13,20 @@ const {
 
 const { Pool } = pkg;
 
+const pool = new Pool({
+  user: DB_USER,
+  host: DB_HOST,
+  database: DB_DATABASE,
+  password: DB_PASSWORD,
+  port: DB_PORT,
+});
+
 const connectDb = async () => {
   try {
-    const pool = new Pool({
-      user: DB_USER,
-      host: DB_HOST,
-      database: DB_DATABASE,
-      password: DB_PASSWORD,
-      port: DB_PORT,
-    });
-
     await pool.connect();
   } catch (err) {
     console.log(err);
   }
 };
 
-export default connectDb;
+export default { connectDb, pool };

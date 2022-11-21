@@ -5,6 +5,7 @@ import cors from 'cors';
 import compression from 'compression';
 import * as dotenv from 'dotenv';
 import routesV1 from './routes/v1/index.js';
+import connectDb from './config/db.js';
 
 dotenv.config();
 
@@ -32,6 +33,9 @@ app.use(cors());
 app.options('*', cors());
 
 app.use('/v1', routesV1);
+
+// Connect the database PostgreSQL
+connectDb();
 
 app.listen(NODE_PORT, () => {
   console.log(`App listen on port ${NODE_PORT}.`);

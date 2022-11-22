@@ -1,9 +1,10 @@
 class BaseError extends Error {
-  constructor(name, statusCode, isOperational, description) {
-    super(description);
+  constructor(statusCode, message, stack, isOperational = true) {
+    super(stack);
+    console.log(`statusCode ${statusCode}, name ${message}`);
 
     Object.setPrototypeOf(this, new.target.prototype);
-    this.name = name;
+    this.message = message;
     this.statusCode = statusCode;
     this.isOperational = isOperational;
     Error.captureStackTrace(this);

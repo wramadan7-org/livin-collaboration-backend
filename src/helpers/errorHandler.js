@@ -1,11 +1,8 @@
 import BaseError from './baseError.js';
-
-const logError = (error) => {
-  console.error(error);
-};
+import logger from '../config/logger.js';
 
 const logErrorMiddleware = (error, req, res, next) => {
-  logError(error);
+  logger.error(error);
   next(error);
 };
 
@@ -23,7 +20,6 @@ const isOperational = (error) => {
 };
 
 export default {
-  logError,
   logErrorMiddleware,
   returnError,
   isOperational,

@@ -8,11 +8,12 @@ import httpStatus from 'http-status';
 import routesV1 from './routes/v1/index.js';
 import configDb from './config/db.js';
 import errorHandler from './helpers/errorHandler.js';
+import logger from './config/logger.js';
 
 dotenv.config();
 
 const { NODE_PORT } = process.env;
-const { logError, isOperational, returnError } = errorHandler;
+const { isOperational, returnError } = errorHandler;
 
 const app = express();
 
@@ -50,7 +51,7 @@ app.response.sendWrapped = function (message, data, statusCode = httpStatus.OK) 
 };
 
 process.on('uncaughtException', (error) => {
-  logError(error);
+  logger.error(error);
 
   if (!isOperational(error)) {
     process.exit(1);
@@ -62,7 +63,6 @@ process.on('unhandledRejection', (error) => {
   throw error;
 });
 
-app.use(logError);
 app.use(returnError);
 
 app.listen(NODE_PORT, () => {

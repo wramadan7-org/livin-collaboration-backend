@@ -1,5 +1,5 @@
 import httpStatus from 'http-status';
-import BaseError from '../helpers/baseError.js';
+import BaseError from '../middlewares/baseError.js';
 import userService from '../services/userService.js';
 
 const getAllUserController = async (req, res, next) => {

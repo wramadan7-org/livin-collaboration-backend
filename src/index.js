@@ -7,7 +7,7 @@ import * as dotenv from 'dotenv';
 import httpStatus from 'http-status';
 import routesV1 from './routes/v1/index.js';
 import configDb from './config/db.js';
-import errorHandler from './helpers/errorHandler.js';
+import errorHandler from './middlewares/errorHandler.js';
 import logger from './config/logger.js';
 
 dotenv.config();
@@ -42,6 +42,7 @@ app.use('/v1', routesV1);
 configDb.connectDb();
 
 // Set response wrapper
+// eslint-disable-next-line func-names
 app.response.sendWrapped = function (message, data, statusCode = httpStatus.OK) {
   return this.status(statusCode).send({
     status: statusCode,
@@ -66,7 +67,7 @@ process.on('unhandledRejection', (error) => {
 app.use(returnError);
 
 app.listen(NODE_PORT, () => {
-  console.log(`App listen on port ${NODE_PORT}.`);
+  logger.info(`App listen on port ${NODE_PORT}.`);
 });
 
 export default app;

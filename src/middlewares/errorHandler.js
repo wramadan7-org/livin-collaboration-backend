@@ -1,4 +1,4 @@
-import BaseError from './baseError.js';
+import BaseError from '../middlewares/baseError.js';
 import logger from '../config/logger.js';
 
 const logErrorMiddleware = (error, req, res, next) => {

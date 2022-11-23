@@ -57,6 +57,7 @@ process.on('uncaughtException', (error) => {
   }
 });
 
+// If the Promise is rejected this will catch it
 process.on('unhandledRejection', (error) => {
   throw error;
 });

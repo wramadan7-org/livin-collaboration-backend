@@ -1,12 +1,31 @@
 import bcrypt from 'bcrypt';
 
-const hashPassword = async (password) => {
-  const salt = 10;
-  const passwordHash = await bcrypt.hash(password, salt);
+const salt = 10;
 
-  return passwordHash;
+/**
+ * Override password to random string
+ * @param { String } password
+ * @returns Random String
+ */
+const hashPassword = async (password) => {
+  const hashing = await bcrypt.hash(password, salt);
+
+  return hashing;
+};
+
+/**
+ * Checking password is match or not
+ * @param {String} passwordBody
+ * @param {String} passwordHashing
+ * @returns Boolean
+ */
+const comparePassword = async (passwordBody, passwordHashing) => {
+  const comparing = await bcrypt.compare(passwordBody, passwordHashing);
+
+  return comparing;
 };
 
 export default {
   hashPassword,
+  comparePassword,
 };

@@ -1,6 +1,17 @@
 import db from '../config/db.js';
 
 /**
+ * Service to create user
+ * @param {Array} data
+ * @returns Object
+ */
+const createUserService = async (data) => {
+  const user = await db.pool.query('INSERT INTO users (firstname, lastname, username, email, phonenumber, accounttype, age, gender, password) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *', data);
+
+  return user;
+};
+
+/**
  * Service to get all user from DB
  * @returns Array
  */
@@ -33,6 +44,7 @@ const getUserByEmailOrUsername = async (emailOrUsername) => {
 };
 
 export default {
+  createUserService,
   getAllUserService,
   getUserByIdService,
   getUserByEmailOrUsername,

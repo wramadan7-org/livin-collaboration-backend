@@ -8,6 +8,11 @@ const createUserValidation = [
   body('lastName')
     .notEmpty()
     .withMessage(validationErrorMessage.FIELD_CANNOT_BE_EMPTY),
+  body('username')
+    .notEmpty()
+    .withMessage(validationErrorMessage.FIELD_CANNOT_BE_EMPTY)
+    .isLength({ min: 3 })
+    .withMessage(`${validationErrorMessage.MIN_LENGTH} 11 character.`),
   body('email')
     .notEmpty()
     .withMessage(validationErrorMessage.FIELD_CANNOT_BE_EMPTY)

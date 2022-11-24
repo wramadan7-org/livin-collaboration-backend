@@ -21,7 +21,19 @@ const getUserByIdService = async (id) => {
   return user;
 };
 
+/**
+ * Service to get user by email or username
+ * @param {String} emailOrUsername
+ * @returns Object
+ */
+const getUserByEmailOrUsername = async (emailOrUsername) => {
+  const user = await db.pool.query(`SELECT * FROM users WHERE email = '${emailOrUsername}' OR username = '${emailOrUsername}'`);
+
+  return user;
+};
+
 export default {
   getAllUserService,
   getUserByIdService,
+  getUserByEmailOrUsername,
 };
